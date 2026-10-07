@@ -98,7 +98,6 @@ export const studioInfo = {
   social: {
     instagram: 'https://www.instagram.com/yogawithsthira/',
     facebook: 'https://www.facebook.com/p/Sthira-Yoga-and-Wellness-61560563537770/',
-    youtube: '#',
   },
 
   /* -----------------------------------------------------------------------
@@ -147,9 +146,6 @@ export const contactLinks = {
   tel: () => `tel:${digits(studioInfo.phoneDial)}`,
   mail: (subject: string = 'Enquiry from the Sthira website') =>
     `mailto:${studioInfo.email}?subject=${encodeURIComponent(subject)}`,
-  /** Gmail web/app compose with To + Subject prefilled. Opens in a new tab. */
-  gmail: (subject: string = 'Enquiry from the Sthira website') =>
-    `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(studioInfo.email)}&su=${encodeURIComponent(subject)}`,
   whatsapp: (message: string = studioInfo.whatsappMessage) =>
     `https://wa.me/${digits(studioInfo.whatsapp)}?text=${encodeURIComponent(message)}`,
   maps: () =>

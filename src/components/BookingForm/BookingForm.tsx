@@ -165,7 +165,7 @@ export function BookingForm() {
             <a href={contactLinks.whatsapp()} target="_blank" rel="noreferrer">
               Message us on WhatsApp
             </a>{' '}
-            or call {studioInfo.phone}.
+            or call <a href={contactLinks.tel()}>{studioInfo.phone}</a>.
           </p>
         </Reveal>
 

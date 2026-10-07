@@ -1,8 +1,57 @@
+import { useEffect, useRef, useState } from 'react'
 import { Icon } from '@/components/ui/Icons'
 import Reveal from '@/components/ui/Reveal'
 import { Section, SectionHead } from '@/components/ui/Section'
 import { contactLinks, hasRealAddress, studioInfo } from '@/data/site'
 import './Contact.css'
+
+/** Copies the studio email address, with a fallback for non-secure contexts. */
+function CopyEmailButton() {
+  const [copied, setCopied] = useState(false)
+  const timer = useRef<number | null>(null)
+
+  useEffect(
+    () => () => {
+      if (timer.current !== null) window.clearTimeout(timer.current)
+    },
+    [],
+  )
+
+  const copy = async () => {
+    const text = studioInfo.email
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text)
+      } else {
+        throw new Error('clipboard unavailable')
+      }
+    } catch {
+      const area = document.createElement('textarea')
+      area.value = text
+      area.style.position = 'fixed'
+      area.style.opacity = '0'
+      document.body.appendChild(area)
+      area.select()
+      document.execCommand('copy')
+      document.body.removeChild(area)
+    }
+    setCopied(true)
+    if (timer.current !== null) window.clearTimeout(timer.current)
+    timer.current = window.setTimeout(() => setCopied(false), 2000)
+  }
+
+  return (
+    <button
+      type="button"
+      className={`contact-card__copy ${copied ? 'is-copied' : ''}`.trim()}
+      onClick={copy}
+      aria-live="polite"
+    >
+      <Icon name={copied ? 'check' : 'mail'} size={15} strokeWidth={1.8} />
+      {copied ? 'Copied' : 'Copy email'}
+    </button>
+  )
+}
 
 export function Contact() {
   const cards = [
@@ -31,9 +80,9 @@ export function Contact() {
       icon: 'mail' as const,
       label: 'Email',
       lines: [studioInfo.email, 'Usually answered within one working day.'],
-      href: contactLinks.gmail(),
+      href: contactLinks.mail(),
       action: 'Write to us',
-      external: true,
+      external: false,
     },
     {
       icon: 'whatsapp' as const,
@@ -71,14 +120,17 @@ export function Contact() {
               </div>
 
               {card.href ? (
-                <a
-                  className="link-arrow contact-card__link"
-                  href={card.href}
-                  {...(card.external ? { target: '_blank', rel: 'noreferrer' } : {})}
-                >
-                  {card.action}
-                  <Icon name="arrow-right" size={16} strokeWidth={1.9} />
-                </a>
+                <div className="contact-card__actions">
+                  <a
+                    className="link-arrow contact-card__link"
+                    href={card.href}
+                    {...(card.external ? { target: '_blank', rel: 'noreferrer' } : {})}
+                  >
+                    {card.action}
+                    <Icon name="arrow-right" size={16} strokeWidth={1.9} />
+                  </a>
+                  {card.icon === 'mail' ? <CopyEmailButton /> : null}
+                </div>
               ) : (
                 <span className="contact-card__pending">Address to be announced</span>
               )}

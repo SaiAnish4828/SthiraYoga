@@ -24,7 +24,6 @@ const PRACTICE_LINKS = [
 const SOCIALS: { key: keyof typeof studioInfo.social; icon: IconName; label: string }[] = [
   { key: 'instagram', icon: 'instagram', label: 'Instagram' },
   { key: 'facebook', icon: 'facebook', label: 'Facebook' },
-  { key: 'youtube', icon: 'youtube', label: 'YouTube' },
 ]
 
 export function Footer() {
@@ -42,7 +41,7 @@ export function Footer() {
 
           <ul className="footer__social" aria-label="Social media">
             {SOCIALS.map((social) => {
-              const href = studioInfo.social[social.key]
+              const href: string = studioInfo.social[social.key]
               const disabled = !href || href === '#'
               return (
                 <li key={social.key}>
@@ -70,6 +69,15 @@ export function Footer() {
                 aria-label={`${studioInfo.name} on WhatsApp`}
               >
                 <Icon name="whatsapp" size={19} strokeWidth={1.6} />
+              </a>
+            </li>
+            <li>
+              <a
+                className="footer__social-link"
+                href={contactLinks.mail()}
+                aria-label={`Email ${studioInfo.name}`}
+              >
+                <Icon name="mail" size={19} strokeWidth={1.6} />
               </a>
             </li>
           </ul>
@@ -113,9 +121,7 @@ export function Footer() {
             </li>
             <li>
               <Icon name="mail" size={17} strokeWidth={1.6} />
-              <a href={contactLinks.gmail()} target="_blank" rel="noreferrer">
-                {studioInfo.email}
-              </a>
+              <a href={contactLinks.mail()}>{studioInfo.email}</a>
             </li>
             <li>
               <Icon name="whatsapp" size={17} strokeWidth={1.6} />

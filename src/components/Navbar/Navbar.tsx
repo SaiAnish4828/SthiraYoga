@@ -150,7 +150,7 @@ export function Navbar() {
 
           <a
             href={`#${BOOKING_ANCHOR}`}
-            className="btn btn--primary btn--lg btn--block drawer__cta"
+            className="btn btn--primary drawer__cta"
             onClick={go(BOOKING_ANCHOR)}
           >
             Book a Class
