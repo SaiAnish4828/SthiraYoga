@@ -97,15 +97,6 @@ export function Navbar() {
           </nav>
 
           <div className="nav__actions">
-            <a
-              href={`#${BOOKING_ANCHOR}`}
-              className="btn btn--primary btn--sm nav__cta"
-              onClick={go(BOOKING_ANCHOR)}
-            >
-              Book a Class
-              <Icon name="arrow-right" size={16} strokeWidth={1.8} />
-            </a>
-
             <button
               ref={toggleRef}
               type="button"

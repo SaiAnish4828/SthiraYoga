@@ -43,16 +43,12 @@
 }
 
 @media (max-width: 560px) {
-  .floating-cta span {
-    display: none;
-  }
-
+  /* Mobile keeps the full pill with text (larger than the old icon dot),
+     only slightly tightened so it fits narrow screens. */
   .floating-cta {
-    width: 3.25rem;
-    height: 3.25rem;
-    min-height: 0;
-    padding: 0;
-    justify-content: center;
+    min-height: 3.1rem;
+    padding: 0.7rem 1.2rem;
+    font-size: var(--text-sm);
   }
 }
 
