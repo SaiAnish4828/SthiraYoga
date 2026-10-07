@@ -1,0 +1,178 @@
+/* ==========================================================================
+   Trainers
+   ========================================================================== */
+
+.trainers {
+  background:
+    linear-gradient(to bottom, var(--off-white), var(--paper) 40%, var(--paper));
+}
+
+.trainers__grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+  max-width: 68rem;
+  margin-inline: auto;
+}
+
+.trainers__item {
+  display: flex;
+}
+
+/* ---- Card ------------------------------------------------------------------ */
+.trainer-card {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+  border-radius: var(--r-lg);
+}
+
+.trainer-card__media {
+  position: relative;
+  overflow: hidden;
+  background: var(--purple-050);
+}
+
+.trainer-card__img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center 25%;
+  transition: transform var(--dur-glacial) var(--ease-soft);
+}
+
+.trainer-card:hover .trainer-card__img,
+.trainer-card:focus-within .trainer-card__img {
+  transform: scale(1.05);
+}
+
+/* Gentle wash so the spec label always stays readable */
+.trainer-card__media::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 45%;
+  background: linear-gradient(to top, rgba(43, 26, 69, 0.62), transparent);
+  pointer-events: none;
+}
+
+.trainer-card__spec {
+  position: absolute;
+  left: 1.1rem;
+  right: 1.1rem;
+  bottom: 1rem;
+  z-index: 1;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* ---- Body ------------------------------------------------------------------- */
+.trainer-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  flex: 1;
+  padding: 1.5rem 1.5rem 1.75rem;
+}
+
+.trainer-card__name {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.trainer-card__bio {
+  flex: 1;
+  font-size: var(--text-sm);
+  line-height: 1.66;
+  color: var(--ink-muted);
+}
+
+.trainer-card__focus {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.35rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line-soft);
+}
+
+.trainer-card__focus li {
+  padding: 0.25rem 0.7rem;
+  border-radius: var(--r-pill);
+  background: var(--purple-050);
+  border: 1px solid var(--purple-100);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--brand);
+}
+
+/* ---- Footnote ----------------------------------------------------------------- */
+.trainers__foot {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  max-width: 40rem;
+  margin: clamp(2.25rem, 2rem + 2vw, 3rem) auto 0;
+  font-size: var(--text-sm);
+  color: var(--ink-faint);
+}
+
+.trainers__foot svg {
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+  color: var(--purple-300);
+}
+
+/* ---- Responsive ------------------------------------------------------------------ */
+@media (min-width: 720px) {
+  .trainers__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+    max-width: 46rem;
+  }
+}
+
+@media (max-width: 719px) {
+  .trainer-card {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .trainer-card__media {
+    flex: 0 0 38%;
+    max-width: 38%;
+  }
+
+  .trainer-card__img {
+    height: 100%;
+    aspect-ratio: auto;
+  }
+
+  .trainer-card__body {
+    padding: 1.25rem 1.25rem 1.35rem;
+  }
+
+  .trainer-card__name {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 430px) {
+  .trainer-card {
+    flex-direction: column;
+  }
+
+  .trainer-card__media {
+    flex: none;
+    max-width: none;
+  }
+
+  .trainer-card__img {
+    aspect-ratio: 16 / 11;
+  }
+}

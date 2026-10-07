@@ -1,0 +1,302 @@
+/* ==========================================================================
+   Testimonials carousel
+   ========================================================================== */
+
+.testimonials {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--paper) 0%, var(--off-white) 100%);
+}
+
+.testimonials__blob {
+  width: 26rem;
+  height: 26rem;
+  background: var(--purple-050);
+  opacity: 0.85;
+}
+
+.testimonials__blob--a {
+  top: 4rem;
+  left: -12rem;
+}
+
+.testimonials__blob--b {
+  bottom: -8rem;
+  right: -12rem;
+}
+
+.testimonials__stage {
+  position: relative;
+  z-index: 1;
+  max-width: 54rem;
+  margin-inline: auto;
+}
+
+/* ---- Viewport + track -------------------------------------------------------- */
+.testimonials__viewport {
+  position: relative;
+  overflow: hidden;
+  padding-block: 0.75rem;
+}
+
+.testimonials__track {
+  display: flex;
+  gap: clamp(1rem, 3vw, 1.75rem);
+  will-change: transform;
+}
+
+/* `is-live` is added once widths are measured: transitions only run from
+   real positions, so there is no glide on first paint — only between cards. */
+.testimonials__track.is-live {
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+
+/* Cards are narrower than the viewport so neighbours peek in from the sides. */
+.testimonials__slide {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  width: min(100% - 3.5rem, 42rem);
+  min-width: 0;
+  opacity: 0.22;
+  transform: scale(0.94);
+  transform-origin: center;
+  transition:
+    opacity var(--dur-slow) var(--ease-out),
+    transform var(--dur-slow) var(--ease-out);
+}
+
+.testimonials__slide.is-prev,
+.testimonials__slide.is-next {
+  opacity: 0.55;
+  transform: scale(0.96);
+}
+
+.testimonials__slide.is-active {
+  opacity: 1;
+  transform: none;
+}
+
+.testimonials__slide .quote-card {
+  flex: 1;
+}
+
+/* ---- Quote card ---------------------------------------------------------------- */
+.quote-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  margin: 0;
+  padding: clamp(2rem, 5vw, 3.25rem) clamp(1.5rem, 5vw, 3.25rem);
+  border-radius: var(--r-xl);
+  background: var(--paper);
+  border: 1px solid var(--line-soft);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+}
+
+.quote-card::after {
+  content: '';
+  position: absolute;
+  inset: auto 22% -1px 22%;
+  height: 3px;
+  border-radius: 3px 3px 0 0;
+  background: linear-gradient(90deg, transparent, var(--purple-200), transparent);
+}
+
+.quote-card__mark {
+  display: inline-grid;
+  place-items: center;
+  align-self: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: var(--purple-050);
+  color: var(--purple-300);
+}
+
+.quote-card__text {
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 1rem + 0.9vw, 1.7rem);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.quote-card__author {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+}
+
+.quote-card__avatar {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  background: linear-gradient(140deg, var(--purple-100), var(--purple-300));
+  color: var(--purple-800);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+}
+
+.quote-card__meta {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  line-height: 1.3;
+}
+
+.quote-card__name {
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.quote-card__context {
+  font-size: var(--text-xs);
+  color: var(--ink-faint);
+}
+
+/* ---- Controls --------------------------------------------------------------------- */
+.testimonials__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.75rem;
+}
+
+/* Arrows float at the sides of the active card, over the faded neighbours. */
+.testimonials__arrow {
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--ink-soft);
+  box-shadow: var(--shadow-md);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition:
+    background-color var(--dur-base) var(--ease-soft),
+    border-color var(--dur-base) var(--ease-soft),
+    color var(--dur-base) var(--ease-soft),
+    transform var(--dur-base) var(--ease-out);
+}
+
+.testimonials__arrow--prev {
+  left: clamp(0.1rem, 1vw, 0.75rem);
+}
+
+.testimonials__arrow--next {
+  right: clamp(0.1rem, 1vw, 0.75rem);
+}
+
+.testimonials__arrow:hover {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.testimonials__dots {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.testimonials__dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  padding: 0;
+  border-radius: var(--r-pill);
+  background: var(--purple-200);
+  transition:
+    width var(--dur-base) var(--ease-out),
+    background-color var(--dur-base) var(--ease-soft);
+}
+
+.testimonials__dot:hover {
+  background: var(--purple-300);
+}
+
+.testimonials__dot.is-active {
+  width: 1.6rem;
+  background: var(--brand);
+}
+
+/* ---- Placeholder note ---------------------------------------------------------------- */
+.testimonials__placeholder {
+  display: flex;
+  gap: 0.7rem;
+  align-items: flex-start;
+  max-width: 42rem;
+  margin: clamp(2rem, 1.5rem + 2vw, 3rem) auto 0;
+  padding: 0.9rem 1.15rem;
+  border-radius: var(--r-md);
+  border: 1px dashed var(--purple-200);
+  background: var(--purple-050);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+.testimonials__placeholder svg {
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+  color: var(--brand);
+}
+
+.testimonials__placeholder code {
+  padding: 0.05rem 0.35rem;
+  border-radius: 4px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  font-size: 0.85em;
+  color: var(--brand-strong);
+}
+
+/* ---- Responsive ------------------------------------------------------------------------ */
+@media (max-width: 559px) {
+  .testimonials__arrow {
+    width: 2.35rem;
+    height: 2.35rem;
+  }
+
+  .quote-card {
+    text-align: left;
+    gap: 1.1rem;
+  }
+
+  .quote-card__mark {
+    align-self: flex-start;
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .quote-card__author {
+    justify-content: flex-start;
+  }
+
+  .quote-card::after {
+    inset-inline: 12%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .testimonials__track.is-live,
+  .testimonials__slide {
+    transition: none;
+  }
+}

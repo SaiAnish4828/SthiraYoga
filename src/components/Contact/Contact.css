@@ -1,0 +1,275 @@
+/* ==========================================================================
+   Contact + map
+   ========================================================================== */
+
+.contact {
+  background: var(--paper);
+}
+
+/* ---- Cards ---------------------------------------------------------------- */
+.contact__grid {
+  display: grid;
+  gap: 1.15rem;
+  grid-template-columns: 1fr;
+}
+
+.contact__item {
+  display: flex;
+}
+
+.contact-card {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.5rem;
+  padding: 1.75rem 1.5rem;
+  border-radius: var(--r-lg);
+}
+
+.contact-card__icon {
+  display: grid;
+  place-items: center;
+  width: 2.85rem;
+  height: 2.85rem;
+  margin-bottom: 0.55rem;
+  border-radius: 58% 42% 52% 48% / 48% 54% 46% 52%;
+  background: var(--purple-050);
+  border: 1px solid var(--purple-100);
+  color: var(--brand);
+  transition:
+    background-color var(--dur-base) var(--ease-soft),
+    color var(--dur-base) var(--ease-soft),
+    border-radius var(--dur-slow) var(--ease-soft),
+    transform var(--dur-base) var(--ease-out);
+}
+
+.contact-card:hover .contact-card__icon {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: #fff;
+  border-radius: 46% 54% 48% 52% / 54% 46% 54% 46%;
+  transform: rotate(-5deg);
+}
+
+.contact-card__label {
+  font-size: 1.2rem;
+}
+
+.contact-card__lines p {
+  font-size: var(--text-sm);
+  line-height: 1.62;
+  color: var(--ink-muted);
+}
+
+.contact-card__lines p:first-child {
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--ink);
+  word-break: break-word;
+}
+
+.contact-card__link {
+  margin-top: auto;
+  padding-top: 0.85rem;
+}
+
+.contact-card__pending {
+  margin-top: auto;
+  padding-top: 0.85rem;
+  font-size: var(--text-xs);
+  font-style: italic;
+  color: var(--ink-faint);
+}
+
+/* ---- Working hours ----------------------------------------------------------- */
+.contact__hours {
+  margin-top: clamp(2.5rem, 2rem + 2.5vw, 3.5rem);
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+  border-radius: var(--r-xl);
+  background: var(--purple-050);
+  border: 1px solid var(--purple-100);
+}
+
+.contact__hours-head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.contact__hours-head h3 {
+  font-size: 1.35rem;
+}
+
+.contact__hours-icon {
+  display: grid;
+  place-items: center;
+  width: 2.35rem;
+  height: 2.35rem;
+  border-radius: 50%;
+  background: var(--paper);
+  color: var(--brand);
+}
+
+.contact__hours-list {
+  display: grid;
+  gap: 0.35rem;
+  margin-top: 1.35rem;
+}
+
+.contact__hours-list > div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.35rem 1.5rem;
+  padding-block: 0.7rem;
+  border-bottom: 1px dashed var(--purple-100);
+  min-width: 0;
+}
+
+@media (max-width: 420px) {
+  .contact__hours-list > div {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .contact__hours-list dd {
+    text-align: left;
+  }
+}
+
+.contact__hours-list > div:last-child {
+  border-bottom: 0;
+}
+
+.contact__hours-list dt {
+  font-weight: 600;
+  font-size: var(--text-sm);
+  color: var(--ink);
+}
+
+.contact__hours-list dd {
+  font-size: var(--text-sm);
+  color: var(--ink-muted);
+  text-align: right;
+}
+
+.contact__hours-note {
+  margin-top: 1.1rem;
+  font-size: var(--text-xs);
+  font-style: italic;
+  color: var(--ink-faint);
+}
+
+/* ---- Map ------------------------------------------------------------------------ */
+.contact__map {
+  margin-top: clamp(2.5rem, 2rem + 2.5vw, 3.5rem);
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.contact__frame {
+  display: block;
+  width: 100%;
+  height: clamp(20rem, 42vw, 30rem);
+  border: 0;
+}
+
+.contact__map-placeholder {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: clamp(19rem, 40vw, 28rem);
+  padding: 2.5rem 1.5rem;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(203, 182, 232, 0.28), transparent 62%),
+    linear-gradient(160deg, #efe9f7 0%, #e6ddf2 100%);
+  overflow: hidden;
+  text-align: center;
+}
+
+/* Faux street grid so the tile reads as a map */
+.contact__map-grid {
+  position: absolute;
+  inset: -10%;
+  background-image:
+    linear-gradient(to right, rgba(106, 68, 168, 0.11) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(106, 68, 168, 0.11) 1px, transparent 1px);
+  background-size: 3.5rem 3.5rem;
+  transform: rotate(-8deg);
+  mask-image: radial-gradient(circle at 50% 50%, #000 20%, transparent 78%);
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 20%, transparent 78%);
+}
+
+.contact__map-pin {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 4.25rem;
+  height: 4.25rem;
+  border-radius: 50% 50% 50% 0;
+  background: var(--brand);
+  color: #fff;
+  box-shadow: var(--shadow-lg);
+  transform: rotate(-45deg);
+  animation: pin-bob 4.5s var(--ease-soft) infinite;
+}
+
+.contact__map-pin svg {
+  transform: rotate(45deg);
+}
+
+@keyframes pin-bob {
+  0%,
+  100% {
+    transform: rotate(-45deg) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: rotate(-45deg) translate3d(-4px, -4px, 0);
+  }
+}
+
+.contact__map-copy {
+  position: relative;
+  margin-top: 1.75rem;
+  max-width: 28rem;
+}
+
+.contact__map-copy h3 {
+  font-size: var(--text-lg);
+  color: var(--purple-800);
+}
+
+.contact__map-copy p {
+  margin-top: 0.6rem;
+  font-size: var(--text-sm);
+  line-height: 1.62;
+  color: var(--ink-soft);
+}
+
+.contact__map-copy .btn {
+  margin-top: 1.25rem;
+}
+
+/* ---- Responsive ------------------------------------------------------------------ */
+@media (min-width: 620px) {
+  .contact__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .contact__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .contact-card {
+    padding: 1.85rem 1.4rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact__map-pin {
+    animation: none;
+  }
+}

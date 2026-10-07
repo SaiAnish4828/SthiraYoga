@@ -1,0 +1,132 @@
+/* ==========================================================================
+   Why Sthira
+   ========================================================================== */
+
+.why {
+  position: relative;
+  background: linear-gradient(180deg, var(--purple-050) 0%, #f2ecf9 100%);
+  overflow: hidden;
+}
+
+/* Soft organic edges top and bottom so the band does not read as a hard block */
+.why__curve {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: clamp(2.5rem, 6vw, 5rem);
+  color: var(--paper);
+  line-height: 0;
+  pointer-events: none;
+}
+
+.why__curve svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.why__curve--top {
+  top: -1px;
+}
+
+.why__curve--bottom {
+  bottom: -1px;
+}
+
+.why .section-head {
+  padding-top: clamp(1rem, 3vw, 2rem);
+}
+
+/* ---- Grid ------------------------------------------------------------------ */
+.why__grid {
+  display: grid;
+  gap: 1.15rem;
+  grid-template-columns: 1fr;
+}
+
+.why__item {
+  display: flex;
+}
+
+.why-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.45rem;
+  padding: 1.85rem 1.6rem;
+  border-radius: var(--r-lg);
+  background: var(--paper);
+  border: 1px solid var(--line-soft);
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-soft),
+    border-color var(--dur-base) var(--ease-soft);
+}
+
+.why-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--purple-100);
+}
+
+.why-card__icon {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: 0.55rem;
+  border-radius: var(--r-md);
+  background: var(--purple-050);
+  color: var(--brand);
+  transition:
+    background-color var(--dur-base) var(--ease-soft),
+    color var(--dur-base) var(--ease-soft),
+    transform var(--dur-base) var(--ease-out);
+}
+
+.why-card:hover .why-card__icon {
+  background: var(--brand);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.why-card__title {
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: var(--ink);
+}
+
+.why-card__text {
+  font-size: var(--text-sm);
+  line-height: 1.66;
+  color: var(--ink-muted);
+}
+
+/* ---- Responsive --------------------------------------------------------------- */
+@media (min-width: 620px) {
+  .why__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .why__grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  /* Let the last card sit comfortably in a 5-up row */
+  .why-card {
+    padding: 1.75rem 1.35rem;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .why__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

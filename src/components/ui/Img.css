@@ -1,0 +1,9 @@
+.img {
+  opacity: 0;
+  transition: opacity var(--dur-slow) var(--ease-soft);
+  background-color: var(--purple-050);
+}
+
+.img.is-loaded {
+  opacity: 1;
+}

@@ -1,0 +1,63 @@
+.floating-cta {
+  position: fixed;
+  right: clamp(0.9rem, 3vw, 2rem);
+  bottom: calc(clamp(0.9rem, 3vw, 2rem) + env(safe-area-inset-bottom, 0px));
+  z-index: 80;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 3.1rem;
+  padding: 0.7rem 1.35rem;
+  border-radius: var(--r-pill);
+  background: var(--brand);
+  color: #fff;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  box-shadow: 0 12px 32px rgba(106, 68, 168, 0.36);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(1rem) scale(0.96);
+  transition:
+    opacity var(--dur-base) var(--ease-soft),
+    transform var(--dur-base) var(--ease-out),
+    visibility 0s linear var(--dur-base),
+    background-color var(--dur-base) var(--ease-soft);
+}
+
+.floating-cta.is-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: none;
+  transition-delay: 0s;
+}
+
+.floating-cta:hover {
+  background: var(--brand-strong);
+  transform: translateY(-2px);
+}
+
+.floating-cta svg {
+  color: var(--purple-100);
+}
+
+@media (max-width: 560px) {
+  .floating-cta span {
+    display: none;
+  }
+
+  .floating-cta {
+    width: 3.25rem;
+    height: 3.25rem;
+    min-height: 0;
+    padding: 0;
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .floating-cta {
+    transition-duration: 0.01ms;
+  }
+}

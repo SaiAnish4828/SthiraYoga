@@ -1,0 +1,450 @@
+/* ==========================================================================
+   Global styles — reset, base elements, shared primitives
+   ========================================================================== */
+
+/* ---- Reset ------------------------------------------------------------ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  /* Keep anchored sections clear of the sticky header */
+  scroll-padding-top: calc(var(--nav-h) + 1.25rem);
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.7;
+  color: var(--ink);
+  background-color: var(--off-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+/* App root + sections must never force the page wider than the viewport
+   (the classic "right side cut off" on 360-390px phones). */
+#root,
+main,
+section,
+footer,
+header {
+  min-width: 0;
+  max-width: 100%;
+}
+
+section {
+  overflow-x: clip;
+}
+
+body.is-locked {
+  overflow: hidden;
+}
+
+img,
+picture,
+video,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.14;
+  letter-spacing: var(--tracking-tight);
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+/* ---- Accessibility primitives ----------------------------------------- */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 200;
+  padding: 0.7rem 1.15rem;
+  border-radius: var(--r-pill);
+  background: var(--brand-deep);
+  color: #fff;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  transform: translateY(-160%);
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+:focus-visible {
+  outline: 2px solid var(--purple-400);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: var(--purple-100);
+  color: var(--purple-900);
+}
+
+/* ---- Layout helpers ---------------------------------------------------- */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  min-width: 0;
+}
+
+/* Grid/flex children must be allowed to shrink below content size,
+   otherwise a long word or wide chip forces the whole page wider. */
+[class*='__grid'] > *,
+[class*='__inner'] > *,
+[class*='__shell'] > * {
+  min-width: 0;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+li {
+  overflow-wrap: break-word;
+}
+
+.container--narrow {
+  max-width: var(--container-narrow);
+}
+
+.section {
+  position: relative;
+  padding-block: var(--section-y);
+}
+
+.section--tight {
+  padding-block: clamp(3rem, 2rem + 4vw, 5.5rem);
+}
+
+/* ---- Typographic helpers ----------------------------------------------- */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--brand);
+}
+
+.eyebrow::before {
+  content: '';
+  width: 1.75rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.5;
+}
+
+.eyebrow--center::after {
+  content: '';
+  width: 1.75rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.5;
+}
+
+.section-title {
+  font-size: var(--text-2xl);
+  margin-top: 0.85rem;
+}
+
+.section-lede {
+  font-size: var(--text-md);
+  color: var(--ink-muted);
+  line-height: 1.65;
+  max-width: 46rem;
+  margin-top: 1.1rem;
+}
+
+.section-head {
+  margin-bottom: clamp(2.5rem, 1.6rem + 3.4vw, 4.5rem);
+}
+
+.section-head--center {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.section-head--center .section-lede {
+  margin-inline: auto;
+}
+
+.accent {
+  color: var(--brand);
+}
+
+.script-word {
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--brand);
+}
+
+/* ---- Buttons ------------------------------------------------------------ */
+.btn {
+  --btn-bg: var(--brand);
+  --btn-fg: var(--on-brand);
+  --btn-border: var(--brand);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 3rem;
+  padding: 0.8rem 1.7rem;
+  border: 1px solid var(--btn-border);
+  border-radius: var(--r-pill);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  text-align: center;
+  cursor: pointer;
+  transition:
+    background-color var(--dur-base) var(--ease-soft),
+    color var(--dur-base) var(--ease-soft),
+    border-color var(--dur-base) var(--ease-soft),
+    box-shadow var(--dur-base) var(--ease-soft),
+    transform var(--dur-base) var(--ease-out);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn:disabled {
+  opacity: 0.62;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn--primary {
+  box-shadow: 0 6px 18px rgba(106, 68, 168, 0.22);
+}
+
+.btn--primary:hover {
+  background: var(--brand-strong);
+  border-color: var(--brand-strong);
+  box-shadow: 0 12px 28px rgba(106, 68, 168, 0.28);
+}
+
+.btn--ghost {
+  --btn-bg: transparent;
+  --btn-fg: var(--brand);
+  --btn-border: var(--purple-200);
+}
+
+.btn--ghost:hover {
+  --btn-bg: var(--purple-050);
+  --btn-border: var(--purple-300);
+}
+
+.btn--on-dark {
+  --btn-bg: transparent;
+  --btn-fg: #fff;
+  --btn-border: rgba(255, 255, 255, 0.55);
+}
+
+.btn--on-dark:hover {
+  --btn-bg: rgba(255, 255, 255, 0.12);
+  --btn-border: #fff;
+}
+
+.btn--lg {
+  min-height: 3.4rem;
+  padding: 1rem 2.15rem;
+  font-size: var(--text-base);
+}
+
+.btn--sm {
+  min-height: 2.5rem;
+  padding: 0.55rem 1.2rem;
+}
+
+.btn--block {
+  width: 100%;
+}
+
+.btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+/* Text link with underline sweep */
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--brand);
+  background: none;
+  border: 0;
+  padding: 0.35rem 0;
+  cursor: pointer;
+}
+
+.link-arrow svg {
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.link-arrow:hover svg,
+.link-arrow:focus-visible svg {
+  transform: translateX(4px);
+}
+
+/* ---- Cards -------------------------------------------------------------- */
+.card {
+  background: var(--paper);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-soft),
+    border-color var(--dur-base) var(--ease-soft);
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--purple-100);
+}
+
+/* ---- Scroll reveal ------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity var(--dur-glacial) var(--ease-out),
+    transform var(--dur-glacial) var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---- Decorative ----------------------------------------------------------- */
+.decor {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.decor--blob {
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.5;
+}
+
+/* ---- Reduced motion ------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .btn:hover,
+  .card:hover {
+    transform: none;
+  }
+}
