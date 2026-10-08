@@ -116,7 +116,7 @@
 
 .form__field {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   gap: 0.45rem;
   position: relative;
 }

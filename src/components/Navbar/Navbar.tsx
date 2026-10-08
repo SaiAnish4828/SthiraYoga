@@ -7,8 +7,6 @@ import { useBodyScrollLock } from '@/hooks/useBodyScrollLock'
 import { useFocusTrap } from '@/hooks/useFocusTrap'
 import './Navbar.css'
 
-const SCROLL_THRESHOLD = 24
-
 /** Smooth-scrolls to a section id, honouring reduced-motion. */
 function scrollToId(id: string) {
   const el = document.getElementById(id)
@@ -19,7 +17,6 @@ function scrollToId(id: string) {
 }
 
 export function Navbar() {
-  const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const sectionIds = useMemo(() => navLinks.map((link) => link.id), [])
   const active = useActiveSection(sectionIds)
@@ -28,13 +25,6 @@ export function Navbar() {
 
   useBodyScrollLock(menuOpen)
   useFocusTrap(drawerRef, menuOpen)
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > SCROLL_THRESHOLD)
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
 
   useEffect(() => {
     if (!menuOpen) return
@@ -88,7 +78,7 @@ export function Navbar() {
         Skip to main content
       </a>
 
-      <header className={`nav ${scrolled ? 'is-scrolled' : ''}`.trim()}>
+      <header className="nav is-scrolled">
         <div className="container nav__inner">
           <Logo />
 

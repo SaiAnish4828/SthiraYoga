@@ -85,11 +85,10 @@ export const studioInfo = {
   /** Public email address. */
   email: 'Sthirayogwell@gmail.com',
 
-  /** PLACEHOLDER — Working hours. */
+  /** Working hours. */
   hours: [
-    { days: 'Monday – Friday', time: '6:00 AM – 12:00 PM  ·  4:00 PM – 8:00 PM' },
-    { days: 'Saturday', time: '6:00 AM – 1:00 PM' },
-    { days: 'Sunday', time: '7:00 AM – 10:00 AM' },
+    { days: 'Monday – Saturday', time: '6:30 AM – 1:00 PM  ·  5:00 PM – 6:30 PM' },
+    { days: 'Sunday', time: 'Closed' },
   ],
 
   /* -----------------------------------------------------------------------

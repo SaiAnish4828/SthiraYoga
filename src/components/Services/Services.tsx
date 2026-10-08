@@ -92,7 +92,7 @@ export function Services() {
 
             <div className="service-dialog__actions">
               <a href={`#${BOOKING_ANCHOR}`} className="btn btn--primary" onClick={close}>
-                Book this session
+                Book a Class
                 <Icon name="arrow-right" size={17} strokeWidth={1.8} />
               </a>
               <button type="button" className="btn btn--ghost" onClick={close}>
