@@ -19,7 +19,7 @@
 /* Transparent over the hero, then settles into a soft translucent white */
 .nav.is-scrolled {
   height: 4rem;
-  background: rgba(251, 248, 244, 0.86);
+  background: rgba(251, 248, 244, 0.94);
   backdrop-filter: saturate(160%) blur(14px);
   -webkit-backdrop-filter: saturate(160%) blur(14px);
   box-shadow: 0 1px 0 var(--line-soft), 0 6px 24px rgba(43, 26, 69, 0.05);
