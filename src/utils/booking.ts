@@ -17,6 +17,12 @@ export interface BookingValues {
   date: string
   time: string
   message: string
+  /**
+   * Honeypot anti-spam field. Rendered invisibly and left empty by humans;
+   * bots tend to fill it, and the backend silently discards such submissions.
+   * Never validated, never shown.
+   */
+  website: string
 }
 
 export type BookingErrors = Partial<Record<keyof BookingValues, string>>
@@ -29,6 +35,7 @@ export const emptyBooking: BookingValues = {
   date: '',
   time: '',
   message: '',
+  website: '',
 }
 
 /** Options for the "Preferred class / service" select. */
@@ -130,7 +137,9 @@ export async function submitBooking(input: BookingValues): Promise<SubmitResult>
   try {
     const response = await fetch(endpoint, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      // `text/plain` avoids a CORS preflight so Google Apps Script web apps
+      // accept the request; the body is still JSON and parsed server-side.
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify(payload),
     })
 

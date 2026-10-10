@@ -37,7 +37,8 @@ component to update the site.
 
 Set `booking.endpoint` to an HTTPS URL that accepts JSON POST and the booking
 form will start sending submissions there (until then it runs in demo mode and
-only shows the confirmation message).
+only shows the confirmation message). Full email-to-studio setup (Google Sheet
++ Gmail, free) is documented in `BOOKING_SETUP.md`.
 
 ### 2. Photos
 

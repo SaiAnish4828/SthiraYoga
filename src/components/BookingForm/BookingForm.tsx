@@ -339,6 +339,21 @@ export function BookingForm() {
                     {values.message.length}/500
                   </p>
                 </div>
+
+                {/* Honeypot anti-spam field — invisible to humans, see booking.ts. */}
+                <div className="form__honeypot" aria-hidden="true">
+                  <label htmlFor="field-website">Website</label>
+                  <input
+                    id="field-website"
+                    className="form__input"
+                    type="text"
+                    name="website"
+                    autoComplete="off"
+                    tabIndex={-1}
+                    value={values.website}
+                    onChange={(event) => update('website', event.target.value)}
+                  />
+                </div>
               </div>
 
               {state === 'error' ? (

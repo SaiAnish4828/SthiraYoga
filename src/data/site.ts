@@ -108,9 +108,12 @@ export const studioInfo = {
      * Leave empty to keep the form in "demo" mode (it validates and shows a
      * confirmation, but nothing is transmitted).
      *
-     * Supported: any HTTPS endpoint that accepts JSON POST.
+     * Live: Google Apps Script web app (see BOOKING_SETUP.md) that logs to
+     * a Sheet and emails the studio. Sends JSON with a `text/plain` header
+     * so Apps Script accepts it without a CORS preflight.
      */
-    endpoint: '',
+    endpoint:
+      'https://script.google.com/macros/s/AKfycbwHl7MqEsO9_56XM4EjNaacDyjbb9OCpEFWtnBQPFLA3WPphx4ojNVthP2OV13d2mGO/exec',
     /** Heading shown above the form. */
     heading: 'Begin Your Practice',
     /** Confirmation shown after a successful submission. */
